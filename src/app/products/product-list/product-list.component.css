@@ -1,0 +1,9 @@
+thead{
+	color:#337AB7;
+	background: white;
+}
+
+thead>tr>th{
+	text-align: center;
+	background: white;
+}

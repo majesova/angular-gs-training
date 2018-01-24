@@ -1,0 +1,53 @@
+<div class="panel panel-primary">
+	<div class="panel-heading">
+		{{pageTitle}}
+	</div>
+	<div class="panel-body">
+
+			<div class="form-group row">
+		    <label for="inputPassword" class="col-sm-2 col-form-label">Filter by</label>
+		    <div class="col-sm-4">
+		      <input type="text" class="form-control" id="inputPassword" placeholder="criteria" [(ngModel)]='listFilter'>
+		    </div>
+  
+		</div>
+		<div class="form-group row">
+		    <label for="inputPassword" class="col-sm-2 col-form-label">Filtered by 	{{listFilter}}
+		    </label>
+		      
+
+		<div class="table-responsive">
+			<table class="table" *ngIf="products && products.length>0">
+				<thead>
+					<tr> 
+						<th>
+							<button class="btn btn-primary" (click)='toggleImages()'>
+								{{showImages ? 'Hide' : 'Show'}} images
+							</button>
+						</th>
+						<th>Product</th>
+						<th>Code</th>
+						<th>Available</th>
+						<th>Price</th>
+						<th>5 star rating</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr *ngFor='let product of filteredProducts'>
+						<td><img [src]='product.imageUrl' 
+							[title]='product.productName'
+							[style.width.px]='imageWidth'
+							*ngIf='showImages' /></td>
+						<td>{{product.productName | uppercase}}</td>
+						<td>{{product.productCode | lowercase | convertToSpaces: '-'}}</td>
+						<td>{{product.releaseDate | date}}</td>
+						<td>{{product.price | currency:'USD':true:'1.2-2'}}</td>
+						<td>{{product.starRating}}</td>
+					</tr>
+					
+				</tbody>
+			</table>
+		</div>
+
+	</div>
+</div>
