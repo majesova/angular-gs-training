@@ -1,0 +1,7 @@
+.crop {
+    overflow: hidden;
+    text-align: center;
+}
+div {
+    cursor: pointer;
+}
