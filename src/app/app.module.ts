@@ -1,43 +1,28 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import {FormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
 import {RouterModule} from '@angular/router';
-
-
-
+//Own components
 import { AppComponent } from './app.component';
 import {WelcomeComponent} from './home/welcome.component';
-import { ProductListComponent } from './products/product-list/product-list.component';
-import {ConvertToSpacesPipe} from './shared/convert-to-spaces-pipe';
-import { StarComponent } from './products/star/star.component';
 import {ProductService} from './product.service';
-import { ProductDetailsComponent } from './products/product-details/product-details.component';
 import { ProductGuard } from './products/product.guard';
+import { ProductModule } from './products/product.module';
+import { ApproutingModule } from './approuting.module';
 
 
 @NgModule({
-  declarations: [
+  declarations: [//#1- c/u solo va en un único módulo, #2 componentes, directivas y pipes, #3 todo es privado por default para el módulo, #4 resolución detemplates para sus propios componentes
     AppComponent,
-    ProductListComponent,
-    ConvertToSpacesPipe,
-    StarComponent,
-    ProductDetailsComponent,
     WelcomeComponent
   ],
-  imports: [
+  imports: [//#1 hace visibles todos los exports, #2 importa los que necesites, #3 no provee acceso a los otros módulos incluidos
     BrowserModule,
-    FormsModule,
     HttpClientModule,
-    RouterModule.forRoot([
-    	{path:'products', component: ProductListComponent},
-    	{path:'products/:id', component: ProductDetailsComponent, canActivate:[ProductGuard]},
-    	{path:'welcome', component: WelcomeComponent},
-    	{path:'', redirectTo:'welcome', pathMatch:'full'},
-    	{path: '***', redirectTo:'welcome',pathMatch:'full'}
-    	], {useHash:true})
+    ProductModule,
+    ApproutingModule
   ],
   providers: [ProductService, ProductGuard],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent]//#1. Punto de inicio de la aplicación, #2.- va un módulo al menos #3.- Solo va en app.module
 })
 export class AppModule { }
